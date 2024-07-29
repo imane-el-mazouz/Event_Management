@@ -3,7 +3,10 @@ package com.hello.event.controller;
 
 import com.hello.event.model.Contact;
 import com.hello.event.model.Reservation;
+import com.hello.event.model.User;
+import com.hello.event.repository.UserRepository;
 import com.hello.event.service.ReservationService;
+import com.hello.event.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,7 @@ import java.util.List;
 @RequestMapping("api/reservation")
 public class ReservationController {
     private final ReservationService reservationService;
+    private final UserRepository userRepository;
 
 //    @PreAuthorize("hasRole('CLIENT')")
 //    @PostMapping("/add")
@@ -38,7 +42,9 @@ public class ReservationController {
     public ResponseEntity<Reservation> save(@Valid @RequestBody Reservation reservation) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();
+        User user = userRepository.findByUsername(username);
         try {
+            reservation.setUser(user);
             Reservation savedReservation = reservationService.save(reservation);
             return ResponseEntity.ok(savedReservation);
         } catch (Exception e) {

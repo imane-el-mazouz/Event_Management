@@ -25,21 +25,20 @@ export class SignupComponent {
   ) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
-      profession: [''],
-      phone: ['']
+      phone: [''],
+      address: ['']
     });
   }
 
   signup(): void {
-    const { name, email, password, profession } = this.signupForm.value;
+    const { name, username, password } = this.signupForm.value;
     let info : User = this.signupForm.value;
     this.http.post<{ accessToken: string, user: any }>('http://localhost:8081/api/auth/signup', {
       name,
-      email,
+      username,
       password,
-      profession,
     }).subscribe(
       response => {
         this.authService.setToken(response.accessToken);

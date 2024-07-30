@@ -1,0 +1,21 @@
+<div class="profile-container">
+  <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" />
+    </div>
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" [value]="profileForm.get('username')?.value" disabled />
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" formControlName="phone" />
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input type="text" id="address" formControlName="address" />
+    </div>
+    <button type="submit" [disabled]="profileForm.invalid">Update Profile</button>
+  </form>
+</div>

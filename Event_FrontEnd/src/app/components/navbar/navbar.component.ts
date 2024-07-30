@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import {AsyncPipe, NgIf} from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -11,8 +11,8 @@ import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-nav',
-  templateUrl: './my-nav.component.html',
-  styleUrl: './my-nav.component.scss',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
   standalone: true,
   imports: [
     MatToolbarModule,
@@ -24,9 +24,8 @@ import { map, shareReplay } from 'rxjs/operators';
     NgIf,
   ]
 })
-export class MyNavComponent {
+export class NavbarComponent {
   private breakpointObserver = inject(BreakpointObserver);
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),

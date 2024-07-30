@@ -27,7 +27,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from '../auth_service/user-auth-service.service';
+import { AuthService } from '../auth_service/auth-service.service';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

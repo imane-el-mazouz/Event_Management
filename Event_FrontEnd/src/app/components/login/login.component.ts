@@ -25,14 +25,14 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      name: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
   login(): void {
-    const { name, password } = this.loginForm.value;
-    this.http.post<{ accessToken: string, user: any }>('http://localhost:8081/api/auth/login', { name, password })
+    const { username, password } = this.loginForm.value;
+    this.http.post<{ accessToken: string, user: any }>('http://localhost:8081/api/auth/login', { username, password })
       .subscribe(
         response => {
           this.authService.setToken(response.accessToken);

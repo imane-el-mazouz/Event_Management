@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth_service/user-auth-service.service';
+import { AuthService } from '../../service/auth_service/auth-service.service';
 import {User} from "../../model/user_model/user";
 
 @Component({

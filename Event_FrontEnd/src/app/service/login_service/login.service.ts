@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../auth_service/user-auth-service.service';
+import { AuthService } from '../auth_service/auth-service.service';
 
 @Component({
   selector: 'app-login',

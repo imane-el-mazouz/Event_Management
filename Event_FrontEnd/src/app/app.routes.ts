@@ -9,6 +9,7 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import { EventListComponent} from "./components/event/event-list/event-list.component";
 import { AboutListComponent} from "./components/about/about-list/about-list.component";
 import {ContactFormComponent} from "./components/contact/contact-form/contact-form.component";
+import {ProfileComponent} from "./components/profile/profile/profile.component";
 
 export const routes: Routes = [
  // { path: 'users', component:  },
@@ -22,7 +23,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path : 'signup' , component: SignupComponent},
   { path : 'dashboard' , component: DashboardComponent},
-
+  { path : 'profile' , component : ProfileComponent},
 
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

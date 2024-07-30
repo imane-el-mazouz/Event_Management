@@ -7,7 +7,7 @@ import { NavbarComponent} from "./components/navbar/navbar.component";
 import { FooterComponent} from "./components/footer/footer.component";
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
-import { UserService } from './service/user_service/user.service';
+import { ProfileService } from './service/profile_service/profile.service';
 //import {  } from './service/auth_interceptor/auth-interceptor-service.service.spec';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -40,7 +40,7 @@ import {AuthInterceptorService} from "./service/auth_interceptor/auth-intercepto
     AppComponent,
   ],
   providers: [
-    UserService,
+    ProfileService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

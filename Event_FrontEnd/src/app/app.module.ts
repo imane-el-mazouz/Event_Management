@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-
+import { NavbarComponent} from "./components/navbar/navbar.component";
+import { FooterComponent} from "./components/footer/footer.component";
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { UserService } from './service/user_service/user.service';
@@ -20,9 +21,9 @@ import {AuthInterceptorService} from "./service/auth_interceptor/auth-intercepto
 @NgModule({
   declarations: [
 
+
   ],
   imports: [
-    BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
@@ -33,7 +34,10 @@ import {AuthInterceptorService} from "./service/auth_interceptor/auth-intercepto
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    BrowserModule,
+    AppComponent,
   ],
   providers: [
     UserService,

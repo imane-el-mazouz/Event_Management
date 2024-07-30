@@ -30,13 +30,33 @@ export class LoginComponent {
     });
   }
 
+//   login(): void {
+//     const { username, password } = this.loginForm.value;
+//     this.http.post<{ accessToken: string, user: any }>('http://localhost:8081/api/auth/login', { username, password })
+//       .subscribe(
+//         response => {
+//           this.authService.setToken(response.accessToken);
+//           this.router.navigate(['/home']);
+//         },
+//         error => {
+//           console.error('Error during login', error);
+//         }
+//       );
+//   }
+// }
   login(): void {
     const { username, password } = this.loginForm.value;
     this.http.post<{ accessToken: string, user: any }>('http://localhost:8081/api/auth/login', { username, password })
       .subscribe(
         response => {
           this.authService.setToken(response.accessToken);
-          this.router.navigate(['/home']);
+          if (response.user.role === 'ADMIN') {
+            this.router.navigate(['/dashboard']);
+          } else if (response.user.role === 'CLIENT') {
+            this.router.navigate(['/home']);
+          } else {
+            console.error('Unrecognized role:', response.user.role);
+          }
         },
         error => {
           console.error('Error during login', error);

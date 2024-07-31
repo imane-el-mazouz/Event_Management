@@ -45,7 +45,7 @@ export class LoginComponent {
           if (response.user.role === 'ADMIN') {
             this.router.navigate(['/dashboard']);
           } else if (response.user.role === 'CLIENT') {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/profile']);
           } else {
             this.errorMessage = 'role undefined: ' + response.user.role;
           }

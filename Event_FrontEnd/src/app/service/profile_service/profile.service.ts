@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../../model/user_model/user';
-import { AuthService } from '../auth_service/auth-service.service';
+import { Reservation } from '../../model/reservation_model/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -11,33 +11,35 @@ import { AuthService } from '../auth_service/auth-service.service';
 export class ProfileService {
   private apiUrl = 'http://localhost:8081/api/user';
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient) { }
 
-  getUserProfile(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  updateUserProfile(id: number | undefined, updatedUser: Partial<User>): Observable<User> {
-    if (id === undefined) {
-      return throwError(() => new Error('User ID is required for updating profile.'));
-    }
-    return this.http.put<User>(`${this.apiUrl}/${id}`, updatedUser, {
-      headers: this.createAuthorizationHeader()
-    }).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  private createAuthorizationHeader(): HttpHeaders {
-    const token = this.authService.getToken();
-    if (!token) {
-      throw new Error('No token found');
-    }
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
     return new HttpHeaders({
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
+  }
+
+  // getUserProfile(id: number): Observable<User> {
+  //   return this.http.get<User>(`${this.apiUrl}/profile/${id}`);
+  // }
+  getUserProfile(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/user/${id}`, { headers: this.getAuthHeaders() }).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  updateUserProfile(id: number, updatedUser: Partial<User>): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/user/${id}`, updatedUser, { headers: this.getAuthHeaders() }).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  getUserReservations(id: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations/${id}`, { headers: this.getAuthHeaders() }).pipe(
+        catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

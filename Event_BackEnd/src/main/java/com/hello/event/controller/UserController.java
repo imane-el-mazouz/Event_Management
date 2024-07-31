@@ -93,6 +93,17 @@ public class UserController {
     }
 
   }
+  @GetMapping("/{id}")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
+  public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    User user = userService.getUserById(id);
+    if (user != null) {
+      return ResponseEntity.ok(user);
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
+
 
 }
 

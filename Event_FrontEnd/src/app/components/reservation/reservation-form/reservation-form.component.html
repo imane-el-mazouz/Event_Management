@@ -14,8 +14,11 @@
           <option *ngFor="let event of events" [ngValue]="event">{{ event.name }}</option>
         </select>
       </div>
-      <button type="submit">Create</button>
-       </form>
+      <div class="container-login100-form-btn">
+        <button class="login100-form-btn" type="submit" [disabled]="reservationForm.invalid">
+          Add
+        </button>
+      </div>       </form>
   </div>
 
 

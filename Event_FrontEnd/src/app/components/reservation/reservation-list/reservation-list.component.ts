@@ -23,6 +23,7 @@ export class ReservationListComponent {
     this.reservationService.getUserReservations().subscribe(
       data => this.reservations= data,
       error => console.error('Error fetching reservations:', error)
+      //
     );
   }
 }

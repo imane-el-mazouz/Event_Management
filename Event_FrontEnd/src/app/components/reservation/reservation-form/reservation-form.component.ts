@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ReservationService } from '../../../service/reservation_service/reservation.service';
 import { EventService } from '../../../service/event_service/event.service';
 import { Event } from '../../../model/event_model/event';
 import { Reservation } from '../../../model/reservation_model/reservation';
 import { NavbarComponent } from "../../navbar/navbar.component";
-import {NgForOf, NgIf} from "@angular/common";
+import { NgForOf, NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-reservation-form',
@@ -22,7 +22,7 @@ import {NgForOf, NgIf} from "@angular/common";
 })
 export class ReservationFormComponent implements OnInit {
   reservationForm: FormGroup;
-  events: Event[] = []; // Array to hold event data
+  events: Event[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +32,6 @@ export class ReservationFormComponent implements OnInit {
   ) {
     this.reservationForm = this.fb.group({
       dateTime: ['', Validators.required],
-      rib: ['', Validators.required],
       event: [null, Validators.required]
     });
   }
@@ -40,13 +39,17 @@ export class ReservationFormComponent implements OnInit {
   ngOnInit(): void {
     this.eventService.getEvents().subscribe(events => {
       this.events = events;
+      console.log('Events loaded:', this.events);
     });
   }
 
   onSubmit(): void {
     if (this.reservationForm.valid) {
-      const reservation: Reservation = this.reservationForm.value;
-      reservation.event = this.events.find(event => event.idE === this.reservationForm.get('event')?.value?.idE) || null;
+      let reservation: Reservation = this.reservationForm.value;
+      let selectedEvent = this.events.find(event => event.idE === this.reservationForm.get('event')?.value?.idE);
+      console.log('Selected event:', selectedEvent);
+      reservation.event = selectedEvent || null;
+
       this.reservationService.saveReservation(reservation).subscribe({
         next: (response) => {
           console.log('Reservation saved successfully', response);

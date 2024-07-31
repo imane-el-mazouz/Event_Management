@@ -5,6 +5,7 @@ import com.hello.event.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -93,6 +94,16 @@ public class UserController {
     }
 
   }
+  @GetMapping("/get")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
+  public ResponseEntity<User> getUserById(@AuthenticationPrincipal User user) {
+    if (user != null) {
+      return ResponseEntity.ok(user);
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
+
 
 }
 

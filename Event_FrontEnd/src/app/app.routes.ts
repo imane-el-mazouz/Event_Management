@@ -12,6 +12,7 @@ import {ContactFormComponent} from "./components/contact/contact-form/contact-fo
 import {ProfileComponent} from "./components/profile/profile/profile.component";
 import {ReservationListComponent} from "./components/reservation/reservation-list/reservation-list.component";
 import {ReservationFormComponent} from "./components/reservation/reservation-form/reservation-form.component";
+import {ContactListComponent} from "./components/contact/contact-list/contact-list.component";
 
 export const routes: Routes = [
  // { path: 'users', component:  },
@@ -20,7 +21,8 @@ export const routes: Routes = [
 
   { path: 'events', component: EventListComponent },
   { path: 'about', component: AboutListComponent },
-  { path: 'contact', component: ContactFormComponent },
+  { path: 'contact', component: ContactListComponent },
+  { path: 'addC', component: ContactFormComponent },
 
   { path: 'login', component: LoginComponent },
   { path : 'signup' , component: SignupComponent},

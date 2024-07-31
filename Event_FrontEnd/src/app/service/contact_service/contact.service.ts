@@ -32,5 +32,10 @@ export class ContactService {
     return throwError(() => new Error('Something went wrong, please try again later.'));
   }
 
+  getContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`${this.apiUrl}/all`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
 }
 

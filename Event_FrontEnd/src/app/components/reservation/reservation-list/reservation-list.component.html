@@ -1,1 +1,40 @@
-<p>reservation-list works!</p>
+<app-my-nav></app-my-nav>
+
+<main class="main">
+  <div *ngIf="reservations.length > 0; else noReservations">
+    <div class="container">
+      <div class="card my-5">
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">dateTime</th>
+              <th scope="col">Event Name</th>
+              <th scope="col">Event Description</th>
+              <th scope="col">Event Location</th>
+              <th scope="col">Event Category</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let reservation of reservations">
+              <td>{{ reservation.id }}</td>
+              <td>{{ reservation.dateTime }}</td>
+              <td>{{ reservation.event?.name }}</td>
+              <td>{{ reservation.event?.description }}</td>
+              <td>{{ reservation.event?.location }}</td>
+              <td>{{ reservation.event?.category }}</td>
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noReservations>
+    <p>No Reservations found.</p>
+  </ng-template>
+</main>
+

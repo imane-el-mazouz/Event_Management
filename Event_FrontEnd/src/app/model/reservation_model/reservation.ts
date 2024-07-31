@@ -5,5 +5,5 @@ export class Reservation {
   id !: number;
   dateTime !: Date;
   user!: User;
-  event! : Event;
+  event! : Event | null;
 }

@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
+@CrossOrigin(origins = "*")
+
 public class UserController {
 
   @Autowired
@@ -80,6 +82,7 @@ public class UserController {
   }
 
   @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
+
   @PutMapping("/{id}")
   public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
     try {
@@ -88,7 +91,9 @@ public class UserController {
     } catch (RuntimeException e) {
       return ResponseEntity.notFound().build();
     }
+
   }
+
 }
 
 

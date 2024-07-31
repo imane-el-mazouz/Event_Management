@@ -21,6 +21,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/reservation")
+@CrossOrigin(origins = "*")
+
 public class ReservationController {
     private final ReservationService reservationService;
     private final UserRepository userRepository;

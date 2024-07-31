@@ -10,6 +10,8 @@ import { EventListComponent} from "./components/event/event-list/event-list.comp
 import { AboutListComponent} from "./components/about/about-list/about-list.component";
 import {ContactFormComponent} from "./components/contact/contact-form/contact-form.component";
 import {ProfileComponent} from "./components/profile/profile/profile.component";
+import {ReservationListComponent} from "./components/reservation/reservation-list/reservation-list.component";
+import {ReservationFormComponent} from "./components/reservation/reservation-form/reservation-form.component";
 
 export const routes: Routes = [
  // { path: 'users', component:  },
@@ -24,6 +26,10 @@ export const routes: Routes = [
   { path : 'signup' , component: SignupComponent},
   { path : 'dashboard' , component: DashboardComponent},
   { path : 'profile' , component : ProfileComponent},
+
+
+  { path : 'reservations' , component : ReservationListComponent},
+  { path : 'addR' , component : ReservationFormComponent},
 
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

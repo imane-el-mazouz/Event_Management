@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth_service/auth-service.service';
 
-@Component({
-  selector: 'app-login',
-  standalone: true,
-  templateUrl: './login.component.html'
+@Injectable({
+  providedIn: 'root'
 })
 export class LoginComponent {
   constructor(private authService: AuthService, private http: HttpClient) { }

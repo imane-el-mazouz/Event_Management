@@ -6,6 +6,8 @@ import com.hello.event.exception.UsernameAlreadyTaken;
 import com.hello.event.model.User;
 import com.hello.event.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +19,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -40,9 +43,10 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+
     public User updateUser(User user, Long id) {
-        System.out.println("Updating user with ID: " + id);
-        System.out.println("New data: " + user);
+        logger.info("Updating user with ID: {}", id);
+        logger.info("New data: {}", user);
 
         User userToUpdate = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found!"));
@@ -53,11 +57,10 @@ public class UserService implements UserDetailsService {
         userToUpdate.setAddress(user.getAddress());
 
         User updatedUser = userRepository.save(userToUpdate);
-        System.out.println("Updated user: " + updatedUser);
+        logger.info("Updated user: {}", updatedUser);
 
         return updatedUser;
     }
-
 
 
     public void deleteUser(Long id) {

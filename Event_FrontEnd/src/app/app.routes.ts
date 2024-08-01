@@ -15,9 +15,7 @@ import {ReservationFormComponent} from "./components/reservation/reservation-for
 import {ContactListComponent} from "./components/contact/contact-list/contact-list.component";
 
 export const routes: Routes = [
- // { path: 'users', component:  },
   { path: 'home', component: HomeComponent },
-  // { path: 'updateUser/:id', component:  },
 
   { path: 'events', component: EventListComponent },
   { path: 'about', component: AboutListComponent },

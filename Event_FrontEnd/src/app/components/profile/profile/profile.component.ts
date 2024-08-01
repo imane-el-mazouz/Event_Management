@@ -1,76 +1,84 @@
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../service/profile_service/profile.service';
-import { User } from '../../../model/user_model/user';
-import {DatePipe, NgForOf, NgIf} from "@angular/common"; // Ensure correct import
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
     NgIf,
-    DatePipe,
-    NgForOf
+    ReactiveFormsModule,
+    NgForOf,
+    DatePipe
   ],
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  userId: number | null = 1; // Replace with actual value
   profileForm: FormGroup;
-  userId: number | null = null;
-  currentView: string = 'profile';
   reservations: any[] = [];
+  currentView: string = 'profile';
 
   constructor(
-    private fb: FormBuilder,
     private route: ActivatedRoute,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private fb: FormBuilder
   ) {
     this.profileForm = this.fb.group({
-      name: [''],
+      name: ['', Validators.required],
       phone: [''],
       address: ['']
     });
   }
 
-  ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    console.log('ID Parameter from Route:', idParam); // Debugging line
-    this.userId = idParam ? +idParam : null;
-    if (this.userId) {
-      this.loadUserProfile();
-    } else {
-      console.error('User ID is not available');
+  ngOnInit() {
+    this.userId = +this.route.snapshot.paramMap.get('id')!; // Convert to number
+    if (isNaN(this.userId)) {
+      console.error('Invalid user ID:', this.userId);
+      return;
     }
+    this.loadUserProfile(this.userId);
   }
 
-  loadUserProfile(): void {
-    if (this.userId !== null) {
-      this.profileService.getUserProfile(this.userId).subscribe({
-        next: (user: User) => {
-          this.profileForm.patchValue(user);
+
+  loadUserProfile(userId: number): void {
+    if (userId) {
+      this.profileService.getUserProfile(userId).subscribe(
+        (user) => {
+          console.log('User Profile:', user);
+          this.profileForm.patchValue({
+            name: user.name,
+            phone: user.phone,
+            address: user.address
+          });
         },
-        error: (error) => {
+        (error) => {
           console.error('Error loading user profile:', error);
         }
-      });
+      );
+    } else {
+      console.error('Invalid user ID:', userId);
     }
   }
 
+
+
   updateProfile(): void {
-    if (this.profileForm.valid && this.userId !== null) {
-      this.profileService.updateUserProfile(this.userId, this.profileForm.value).subscribe({
-        next: () => {
-          console.log('Profile updated successfully');
+    if (this.profileForm.valid) {
+      const updatedProfile = this.profileForm.value;
+      this.profileService.updateUserProfile(this.userId, updatedProfile).subscribe(
+        (response) => {
+          console.log('Profile updated successfully:', response);
         },
-        error: (error) => {
+        (error) => {
           console.error('Error updating profile:', error);
         }
-      });
+      );
     } else {
-      console.error('Form is invalid or user ID is missing');
+      console.error('Profile form is invalid');
     }
   }
 

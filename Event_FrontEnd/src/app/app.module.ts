@@ -20,6 +20,7 @@ import { MatListModule } from '@angular/material/list';
 import {AuthInterceptorService} from "./service/auth_interceptor/auth-interceptor-service.service";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatCardModule} from "@angular/material/card";
 
 let MatLuxonDateModule;
 
@@ -45,7 +46,9 @@ let MatLuxonDateModule;
     AppComponent,
     MatDividerModule,
     MatNativeDateModule,
-  ],
+    MatCardModule
+
+],
   providers: [
     ProfileService,
     {

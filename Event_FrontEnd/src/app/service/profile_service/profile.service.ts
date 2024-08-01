@@ -25,7 +25,7 @@ export class ProfileService {
   //   return this.http.get<User>(`${this.apiUrl}/profile/${id}`);
   // }
   getUserProfile(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/get`, { headers: this.getAuthHeaders() }).pipe(
+    return this.http.get<User>(`${this.apiUrl}/get/${id}`, { headers: this.getAuthHeaders() }).pipe(
         catchError(this.handleError)
     );
   }
@@ -35,6 +35,8 @@ export class ProfileService {
         catchError(this.handleError)
     );
   }
+
+
 
   getUserReservations(id: number): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(`${this.apiUrl}/reservations/${id}`, { headers: this.getAuthHeaders() }).pipe(

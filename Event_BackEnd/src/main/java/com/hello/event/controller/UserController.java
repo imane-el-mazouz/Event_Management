@@ -94,7 +94,7 @@ public class UserController {
     }
 
   }
-  @GetMapping("/get")
+  @GetMapping("/get/{id}")
   @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
   public ResponseEntity<User> getUserById(@AuthenticationPrincipal User user) {
     if (user != null) {

@@ -67,13 +67,11 @@ export class HomeComponent implements OnInit {
 
   onSearch(): void {
     const { location, category, dateTime } = this.searchForm.value;
-
-    // Ensure dateTime is a Date object
     const date = dateTime ? new Date(dateTime) : null;
 
     if (date && isNaN(date.getTime())) {
       console.error('Invalid date provided');
-      return; // Exit if date is invalid
+      return;
     }
 
     this.eventService.searchEvents(location, category, date).subscribe(

@@ -88,7 +88,7 @@ export class ProfileComponent implements OnInit {
       const updatedUser: Partial<User> = this.profileForm.value;
       this.profileService.updateUserProfile(this.userId, updatedUser).subscribe(
         () => {
-          this.loadUserProfile(); // Reload profile info after update
+          this.loadUserProfile();
         },
         error => {
           console.error('Error updating user profile', error);

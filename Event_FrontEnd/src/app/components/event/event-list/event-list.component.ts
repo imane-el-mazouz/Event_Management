@@ -6,18 +6,18 @@ import { EventService } from '../../../service/event_service/event.service';
 @Component({
   selector: 'app-event-list',
   standalone: true,
-  imports: [NgFor,CommonModule,ReactiveFormsModule],
+  imports: [NgFor, CommonModule, ReactiveFormsModule],
   templateUrl: './event-list.component.html',
-  styleUrl: './event-list.component.scss'
+  styleUrls: ['./event-list.component.scss']
 })
-export class EventListComponent {
+export class EventListComponent implements OnInit {
 
   events: any[] = [];
   searchForm: FormGroup;
   eventForm: FormGroup;
   isEditing = false;
   editingEventId: number | null = null;
-
+  categories: string[] = ['FESTIVAL', 'SPORTS', 'CONFERENCE', 'WORKSHOP'];
   constructor(
     private eventService: EventService,
     private fb: FormBuilder
@@ -48,54 +48,25 @@ export class EventListComponent {
     });
   }
 
-  onSearch() {
-    const { category, location, date } = this.searchForm.value;
-    this.eventService.searchEvents(category, location, date).subscribe({
+  onSearch(): void {
+    const { location, category, date } = this.searchForm.value;
+    const dateTime = date ? new Date(date) : null;
+
+    if (dateTime && isNaN(dateTime.getTime())) {
+      console.error('Invalid date provided');
+      return;
+    }
+
+    this.eventService.searchEvents(location, category, dateTime).subscribe({
       next: (events) => this.events = events,
-      error: (error) => console.error('Error searching events', error)
+      error: (error) => {
+        console.error('Error fetching events:', error);
+        alert('An error occurred while fetching events. Please try again later.');
+      }
     });
   }
 
-  // onSubmit() {
-  //   if (this.eventForm.valid) {
-  //     if (this.isEditing) {
-  //       this.eventService.update(this.editingEventId!, this.eventForm.value).subscribe({
-  //         next: () => {
-  //           this.loadEvents();
-  //           this.resetForm();
-  //         },
-  //         error: (error) => console.error('Error updating event', error)
-  //       });
-  //     } else {
-  //       this.eventService.create(this.eventForm.value).subscribe({
-  //         next: () => {
-  //           this.loadEvents();
-  //           this.resetForm();
-  //         },
-  //         error: (error) => console.error('Error creating event', error)
-  //       });
-  //     }
-  //   }
-  // }
 
-  // onEdit(event: any) {
-  //   this.isEditing = true;
-  //   this.editingEventId = event.idE;
-  //   this.eventForm.patchValue(event);
-  // }
-  //
-  // onDelete(id: number) {
-  //   if (confirm('Are you sure you want to delete this event?')) {
-  //     this.eventService.delete(id).subscribe({
-  //       next: () => this.loadEvents(),
-  //       error: (error) => console.error('Error deleting event', error)
-  //     });
-  //   }
-  // }
 
-  resetForm() {
-    this.isEditing = false;
-    this.editingEventId = null;
-    this.eventForm.reset();
-  }
+
 }

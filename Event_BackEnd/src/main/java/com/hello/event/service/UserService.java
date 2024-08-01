@@ -41,14 +41,23 @@ public class UserService implements UserDetailsService {
     }
 
     public User updateUser(User user, Long id) {
+        System.out.println("Updating user with ID: " + id);
+        System.out.println("New data: " + user);
+
         User userToUpdate = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found!"));
+
         userToUpdate.setName(user.getName());
         userToUpdate.setUsername(user.getUsername());
         userToUpdate.setPhone(user.getPhone());
         userToUpdate.setAddress(user.getAddress());
-        return userRepository.save(userToUpdate);
+
+        User updatedUser = userRepository.save(userToUpdate);
+        System.out.println("Updated user: " + updatedUser);
+
+        return updatedUser;
     }
+
 
 
     public void deleteUser(Long id) {

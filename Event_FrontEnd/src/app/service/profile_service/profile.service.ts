@@ -21,29 +21,23 @@ export class ProfileService {
     });
   }
 
-  // getUserProfile(id: number): Observable<User> {
-  //   return this.http.get<User>(`${this.apiUrl}/profile/${id}`);
-  // }
   getUserProfile(id: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/get/${id}`, { headers: this.getAuthHeaders() }).pipe(
-        catchError(this.handleError)
+      catchError(this.handleError)
     );
   }
 
   updateUserProfile(id: number, updatedUser: Partial<User>): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${id}`, updatedUser, { headers: this.getAuthHeaders() }).pipe(
-        catchError(this.handleError)
+      catchError(this.handleError)
     );
   }
-
-
 
   getUserReservations(id: number): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(`${this.apiUrl}/reservations/${id}`, { headers: this.getAuthHeaders() }).pipe(
-        catchError(this.handleError)
+      catchError(this.handleError)
     );
   }
-
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';

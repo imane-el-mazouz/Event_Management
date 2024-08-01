@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { AuthService } from '../../../service/auth_service/auth-service.service';
+import { ActivatedRoute } from '@angular/router';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { ProfileService } from '../../../service/profile_service/profile.service';
 import { User } from '../../../model/user_model/user';
-import { Reservation } from '../../../model/reservation_model/reservation';
-import {DatePipe, NgForOf, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common"; // Ensure correct import
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   standalone: true,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
-    NgIf,
     ReactiveFormsModule,
+    NgIf,
     DatePipe,
     NgForOf
   ],
@@ -23,87 +20,61 @@ import {DatePipe, NgForOf, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   userId: number | null = null;
-  userInfo: User | null = null;
-  reservations: Reservation[] = [];
-  errorMessage: string = '';
   currentView: string = 'profile';
+  reservations: any[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private profileService: ProfileService,
-    private authService: AuthService
+    private route: ActivatedRoute,
+    private profileService: ProfileService
   ) {
     this.profileForm = this.fb.group({
-      name: ['', Validators.required],
-      phone: ['', Validators.required],
-      address: ['', Validators.required]
+      name: [''],
+      phone: [''],
+      address: ['']
     });
   }
 
   ngOnInit(): void {
-    this.userId = this.authService.getUserId();
-    if (this.userId !== null) {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    console.log('ID Parameter from Route:', idParam); // Debugging line
+    this.userId = idParam ? +idParam : null;
+    if (this.userId) {
       this.loadUserProfile();
-      this.loadUserReservations();
     } else {
-      this.errorMessage = 'User ID not found.';
+      console.error('User ID is not available');
     }
   }
 
   loadUserProfile(): void {
     if (this.userId !== null) {
-      this.profileService.getUserProfile(this.userId).subscribe(
-        info => {
-          this.userInfo = info;
-          this.profileForm.patchValue({
-            name: info.name || '',
-            phone: info.phone || '',
-            address: info.address || ''
-          });
+      this.profileService.getUserProfile(this.userId).subscribe({
+        next: (user: User) => {
+          this.profileForm.patchValue(user);
         },
-        error => {
-          console.error('Error loading user profile', error);
-          this.errorMessage = 'Error loading user profile.';
+        error: (error) => {
+          console.error('Error loading user profile:', error);
         }
-      );
-    }
-  }
-
-  loadUserReservations(): void {
-    if (this.userId !== null) {
-      this.profileService.getUserReservations(this.userId).subscribe(
-        (reservations: Reservation[]) => {
-          this.reservations = reservations;
-        },
-        error => {
-          console.error('Error loading user reservations', error);
-          this.errorMessage = 'Error loading user reservations.';
-        }
-      );
+      });
     }
   }
 
   updateProfile(): void {
     if (this.profileForm.valid && this.userId !== null) {
-      const updatedUser: Partial<User> = this.profileForm.value;
-      this.profileService.updateUserProfile(this.userId, updatedUser).subscribe(
-        () => {
-          this.loadUserProfile();
+      this.profileService.updateUserProfile(this.userId, this.profileForm.value).subscribe({
+        next: () => {
+          console.log('Profile updated successfully');
         },
-        error => {
-          console.error('Error updating user profile', error);
-          this.errorMessage = 'Error updating user profile.';
+        error: (error) => {
+          console.error('Error updating profile:', error);
         }
-      );
+      });
+    } else {
+      console.error('Form is invalid or user ID is missing');
     }
   }
 
   changeView(view: string): void {
     this.currentView = view;
-    if (view === 'profile') {
-      this.loadUserProfile(); // Reload profile info
-    } else if (view === 'reservations') {
-      this.loadUserReservations(); // Reload reservations
-    }
   }
 }

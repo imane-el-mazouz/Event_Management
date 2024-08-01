@@ -27,8 +27,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path : 'signup' , component: SignupComponent},
   { path : 'dashboard' , component: DashboardComponent},
-  { path : 'profile' , component : ProfileComponent},
-
+  { path: 'profile/:id', component: ProfileComponent },
 
   { path : 'reservations' , component : ReservationListComponent},
   { path : 'addR' , component : ReservationFormComponent},

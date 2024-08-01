@@ -18,6 +18,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {AuthInterceptorService} from "./service/auth_interceptor/auth-interceptor-service.service";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatNativeDateModule} from "@angular/material/core";
+
+let MatLuxonDateModule;
 
 @NgModule({
   declarations: [
@@ -39,6 +43,8 @@ import {AuthInterceptorService} from "./service/auth_interceptor/auth-intercepto
     NavbarComponent,
     BrowserModule,
     AppComponent,
+    MatDividerModule,
+    MatNativeDateModule,
   ],
   providers: [
     ProfileService,

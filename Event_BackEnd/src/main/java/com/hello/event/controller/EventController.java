@@ -30,7 +30,7 @@ public class EventController {
         return ResponseEntity.ok(events);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     @PostMapping("/add")
     public ResponseEntity<Event> addEvent(@RequestBody Event event) {
         Event savedEvent = eventService.save(event);

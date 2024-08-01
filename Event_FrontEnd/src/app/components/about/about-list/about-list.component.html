@@ -1,1 +1,45 @@
-<p>about-list works!</p>
+<!--<main class="about-list-main">-->
+<!--  <h2>About Our Team and Values</h2>-->
+<!--  <div *ngIf="about.length > 0">-->
+<!--    <div *ngFor="let item of about">-->
+<!--      <div *ngIf="item.type === 'team'">-->
+<!--        <h3>{{ item.name }} - {{ item.role }}</h3>-->
+<!--        <p>{{ item.bio }}</p>-->
+<!--      </div>-->
+<!--      <div *ngIf="item.type === 'value'">-->
+<!--        <h3>{{ item.title }}</h3>-->
+<!--        <p>{{ item.description }}</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div *ngIf="about.length === 0">-->
+<!--    <p>No information available at the moment. Please check back later.</p>-->
+<!--  </div>-->
+<!--</main>-->
+<main class="about-list-main">
+  <h2>About Our Team and Values</h2>
+  <div *ngIf="about.length > 0">
+    <div *ngFor="let item of about">
+      <mat-card *ngIf="item.type === 'team'" class="about-card">
+        <mat-card-header>
+          <mat-card-title>{{ item.name }}</mat-card-title>
+          <mat-card-subtitle>{{ item.role }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.bio }}</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card *ngIf="item.type === 'value'" class="about-card">
+        <mat-card-header>
+          <mat-card-title>{{ item.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="about.length === 0">
+    <p>No information available at the moment. Please check back later.</p>
+  </div>
+</main>

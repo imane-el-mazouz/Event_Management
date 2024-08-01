@@ -1,9 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { User } from '../../model/user_model/user';
-import { Reservation } from '../../model/reservation_model/reservation';
+import {User} from "../../model/user_model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,20 @@ import { Reservation } from '../../model/reservation_model/reservation';
 export class ProfileService {
   private apiUrl = 'http://localhost:8081/api/user';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+
+
+  getUserProfile(userId: number): Observable<User> {
+    const url = `${this.apiUrl}/user/${userId}`;
+    return this.http.get<User>(url, { headers: this.getAuthHeaders() }).pipe(
+      catchError(error => {
+        console.error('Error fetching user profile:', error);
+        return throwError(() => new Error('Error fetching user profile'));
+      })
+    );
+  }
+
+
 
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
@@ -21,35 +33,13 @@ export class ProfileService {
     });
   }
 
-  // getUserProfile(id: number): Observable<User> {
-  //   return this.http.get<User>(`${this.apiUrl}/profile/${id}`);
-  // }
-  getUserProfile(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/get`, { headers: this.getAuthHeaders() }).pipe(
-        catchError(this.handleError)
+  updateUserProfile(userId: number | null, updatedProfile: Partial<User>): Observable<User> {
+    const url = `${this.apiUrl}/${userId}`;
+    return this.http.put<User>(url, updatedProfile, { headers: this.getAuthHeaders() }).pipe(
+      catchError(error => {
+        console.error('Error updating user profile:', error);
+        return throwError(() => new Error('Error updating user profile'));
+      })
     );
-  }
-
-  updateUserProfile(id: number, updatedUser: Partial<User>): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, updatedUser, { headers: this.getAuthHeaders() }).pipe(
-        catchError(this.handleError)
-    );
-  }
-
-  getUserReservations(id: number): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations/${id}`, { headers: this.getAuthHeaders() }).pipe(
-        catchError(this.handleError)
-    );
-  }
-
-
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(() => new Error(errorMessage));
   }
 }

@@ -6,6 +6,8 @@ import com.hello.event.exception.UsernameAlreadyTaken;
 import com.hello.event.model.User;
 import com.hello.event.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +19,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -40,14 +43,23 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+
     public User updateUser(User user, Long id) {
+        logger.info("Updating user with ID: {}", id);
+        logger.info("New data: {}", user);
+
         User userToUpdate = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found!"));
+
         userToUpdate.setName(user.getName());
         userToUpdate.setUsername(user.getUsername());
         userToUpdate.setPhone(user.getPhone());
         userToUpdate.setAddress(user.getAddress());
-        return userRepository.save(userToUpdate);
+
+        User updatedUser = userRepository.save(userToUpdate);
+        logger.info("Updated user: {}", updatedUser);
+
+        return updatedUser;
     }
 
 

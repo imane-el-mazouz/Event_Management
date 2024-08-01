@@ -37,5 +37,10 @@ export class ContactService {
       .pipe(catchError(this.handleError));
   }
 
+  getAbout() : Observable<string[]>{
+    return this.http.get<string[]>(`${this.apiUrl}/about`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
 }
 

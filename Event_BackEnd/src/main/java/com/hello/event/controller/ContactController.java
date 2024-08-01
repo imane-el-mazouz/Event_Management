@@ -43,7 +43,6 @@ public ResponseEntity<Contact> saveContact(@RequestBody Contact contact) {
     return ResponseEntity.status(HttpStatus.CREATED).body(savedContact);
 }
     @PreAuthorize("hasRole('CLIENT')")
-
     @GetMapping("/about")
     public ResponseEntity<List<Map<String, String>>> getTeamAndValues() {
         return ResponseEntity.ok(contactService.getTeamAndValues());

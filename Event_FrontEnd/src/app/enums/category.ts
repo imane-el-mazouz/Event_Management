@@ -1,8 +1,8 @@
 export enum Category {
-  festival = 'festival',
-  sports = 'sports',
-  conference = 'conference',
-  workshop = 'workshop',
+  festival = 'FESTIVAL',
+  sports = 'SPORTS',
+  conference = 'CONFERENCE',
+  workshop = 'WORKSHOP',
 
 
 

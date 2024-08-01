@@ -94,16 +94,26 @@ public class UserController {
     }
 
   }
-  @GetMapping("/get")
+//  @GetMapping("/get/{id}")
+//  @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
+//  public ResponseEntity<User> getUserById(@AuthenticationPrincipal User user) {
+//    if (user != null) {
+//      return ResponseEntity.ok(user);
+//    } else {
+//      return ResponseEntity.notFound().build();
+//    }
+//  }
+
+  @GetMapping("/user/{id}")
   @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
-  public ResponseEntity<User> getUserById(@AuthenticationPrincipal User user) {
+  public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    User user = userService.getUserById(id);
     if (user != null) {
       return ResponseEntity.ok(user);
     } else {
       return ResponseEntity.notFound().build();
     }
   }
-
 
 }
 

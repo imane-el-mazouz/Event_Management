@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { Event } from '../../model/event_model/event'; // Import Event model
+import { Event } from '../../model/event_model/event';
+import {Category} from "../../enums/category";
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +23,21 @@ export class EventService {
   }
 
   getEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.apiUrl}/all`, { headers: this.getHeaders() }); // Added headers
+    return this.http.get<Event[]>(`${this.apiUrl}/all`, { headers: this.getHeaders() });
   }
+
+
+  searchEvents(location: string, category: Category, dateTime: Date | null): Observable<Event[]> {
+    let params = new HttpParams();
+    if (location) params = params.set('location', location);
+    if (category) params = params.set('category', category);
+    if (dateTime) params = params.set('dateTime', dateTime.toISOString());
+
+    return this.http.get<Event[]>(`${this.apiUrl}/search`, { headers: this.getHeaders(), params })
+      .pipe(catchError(this.handleError));
+  }
+
+
 
   private handleError(error: any): Observable<never> {
     console.error('An error occurred:', error);

@@ -15,9 +15,7 @@ import {ReservationFormComponent} from "./components/reservation/reservation-for
 import {ContactListComponent} from "./components/contact/contact-list/contact-list.component";
 
 export const routes: Routes = [
- // { path: 'users', component:  },
   { path: 'home', component: HomeComponent },
-  // { path: 'updateUser/:id', component:  },
 
   { path: 'events', component: EventListComponent },
   { path: 'about', component: AboutListComponent },
@@ -27,11 +25,12 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path : 'signup' , component: SignupComponent},
   { path : 'dashboard' , component: DashboardComponent},
-  { path : 'profile' , component : ProfileComponent},
-
+  { path: 'profile/:id', component: ProfileComponent },
 
   { path : 'reservations' , component : ReservationListComponent},
   { path : 'addR' , component : ReservationFormComponent},
+  { path : 'search' , component : HomeComponent},
+
 
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

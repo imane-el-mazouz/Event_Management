@@ -1,2 +1,30 @@
 <main class="main">
+  <h2>Event Management</h2>
+
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <div>
+      <label for="location">Location:</label>
+      <input id="location" formControlName="location" placeholder="Enter location">
+    </div>
+    <div>
+      <label for="category">Category:</label>
+      <select id="category" formControlName="category">
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label for="dateTime">Date:</label>
+      <input id="dateTime" formControlName="dateTime" type="Date">
+    </div>
+    <button type="submit">Search</button>
+  </form>
+  <div class="event-list">
+    <div class="event-item" *ngFor="let event of events">
+      <h3>{{ event.name }}</h3>
+      <p>{{ event.description }}</p>
+      <hr>
+    </div>
+  </div>
 </main>

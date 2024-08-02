@@ -55,7 +55,7 @@ public class ReservationController {
     }
 
     @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
-//    @PreAuthorize("hasRole('ADMIN')")
+
     @GetMapping("/reservations")
     public ResponseEntity<List<Reservation>> getAllReservations() {
         List<Reservation> reservations = reservationService.getAllReservations();

@@ -593,4 +593,29 @@ section,
   bottom: 15px;
 }
 
+.form-control {
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: none;
+  border-radius: 0;
+  color: var(--default-color);
+  background-color:
+    color-mix(in srgb, var(--background-color), transparent 50%);
+  border-color:
+    color-mix(in srgb, var(--accent-color), transparent 70%)
+}
+
+.form-control:focus {
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: none;
+  border-radius: 0;
+  color: var(--default-color);
+  background-color:
+    color-mix(in srgb, var(--background-color), transparent 50%);
+  border-color:
+    color-mix(in srgb, var(--accent-color), transparent 70%)
+}
+
+
 

@@ -1114,7 +1114,7 @@ section,
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
-.contact {
+.contact  , #contact2{
   background-color: color-mix(in srgb, var(--background-color) 90%, white 5%);
   border-bottom: 1px solid color-mix(in srgb, var(--accent-color), transparent 90%);
 }

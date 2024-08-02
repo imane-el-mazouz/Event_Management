@@ -256,7 +256,7 @@ import { EventService } from '../../service/event_service/event.service';
 import { Event } from '../../model/event_model/event';
 import { Category } from '../../enums/category';
 import {DatePipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
-import { RouterLink, RouterOutlet } from "@angular/router";
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
@@ -269,6 +269,10 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatLine } from "@angular/material/core";
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
+import {ReservationService} from "../../service/reservation_service/reservation.service";
+import {Reservation} from "../../model/reservation_model/reservation";
+import {ContactService} from "../../service/contact_service/contact.service";
+import {Contact} from "../../model/contact_model/contact";
 
 @Component({
   selector: 'app-home',
@@ -298,22 +302,52 @@ import { FooterComponent } from "../footer/footer.component";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  reservationForm: FormGroup;
+  events: Event[] = [];
   searchForm!: FormGroup;
   eventForm: FormGroup | undefined;
-  events: Event[] = [];
   categories = Object.values(Category);
   isEditing = false;
   editingEventId: number | null = null;
   searchPerformed = false;
-
+  contactForm: FormGroup;
+  contacts: Contact[] = [];
   constructor(
     private fb: FormBuilder,
-    private eventService: EventService
-  ) {}
+    private reservationService: ReservationService,
+    private eventService: EventService,
+    private router: Router,
+    private contactService: ContactService,
+  ) {
+    this.reservationForm = this.fb.group({
+      dateTime: ['', Validators.required],
+      event: [null, Validators.required]
+    });
+
+
+    this.contactForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      message: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.initializeForms();
     this.loadEvents();
+    this.eventService.getEvents().subscribe(events => {
+      this.events = events;
+      console.log('Events loaded:', this.events);
+    })
+    this.contactService.getContacts().subscribe({
+      next: (contacts) => {
+        this.contacts = contacts;
+        console.log('Contacts loaded:', this.contacts);
+      },
+      error: (error) => {
+        console.error('Error loading contacts', error);
+      }
+    });
   }
 
   private initializeForms(): void {
@@ -328,6 +362,7 @@ export class HomeComponent implements OnInit {
       dateTime: ['', Validators.required],
       location: ['', Validators.required],
       category: ['', Validators.required],
+
       description: ['']
     });
   }
@@ -351,6 +386,38 @@ export class HomeComponent implements OnInit {
         alert('An error occurred while fetching events. Please try again later.');
       }
     });
+  }
+  onSubmit(): void {
+    if (this.reservationForm.valid) {
+      let reservation = this.reservationForm.value;
+      let selectedEvent = this.events.find(event => event.idE === this.reservationForm.get('event')?.value?.idE);
+      console.log('Selected event:', selectedEvent);
+      reservation.event = selectedEvent || null;
+
+      this.reservationService.saveReservation(reservation).subscribe({
+        next: (response) => {
+          console.log('Reservation saved successfully', response);
+          this.router.navigate(['/reservations']);
+        },
+        error: (error) => {
+          console.error('Error during saving reservation', error);
+          alert('An error occurred while saving the reservation. Please try again later.');
+        }
+      });
+    }
+    if (this.contactForm.valid) {
+      let contact: Contact = this.contactForm.value;
+      this.contactService.saveContact(contact).subscribe({
+        next: (response) => {
+          console.log('Contact saved successfully', response);
+          this.router.navigate(['/contacts']);
+        },
+        error: (error) => {
+          console.error('Error during saving contact', error);
+          this.router.navigate(['/home']);
+        }
+      });
+    }
   }
 
   private loadEvents(): void {

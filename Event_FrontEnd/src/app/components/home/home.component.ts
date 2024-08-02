@@ -40,7 +40,8 @@ import {FooterComponent} from "../footer/footer.component";
   NavbarComponent,
   FooterComponent,
   FormsModule,
-  DatePipe,
+  DatePipe, NgOptimizedImage,
+
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']

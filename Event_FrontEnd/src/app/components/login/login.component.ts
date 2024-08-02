@@ -35,7 +35,7 @@ export class LoginComponent {
     const { username, password } = this.loginForm.value;
 
     if (this.loginForm.invalid) {
-      return; // Handle form validation errors here
+      return;
     }
 
     this.http.post<{ accessToken: string, user: { role: string } }>('http://localhost:8081/api/auth/login', { username, password })

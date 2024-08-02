@@ -410,7 +410,7 @@ export class HomeComponent implements OnInit {
       this.contactService.saveContact(contact).subscribe({
         next: (response) => {
           console.log('Contact saved successfully', response);
-          this.router.navigate(['/contacts']);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
           console.error('Error during saving contact', error);

@@ -896,8 +896,8 @@
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-      <h2>Gallery</h2>
-      <p>Some photos from Our Restaurant</p>
+      <h2>IM</h2>
+      <p>Explore our organisations</p>
     </div><!-- End Section Title -->
 
     <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
@@ -1182,7 +1182,7 @@
             <i class="bi bi-telephone flex-shrink-0"></i>
             <div>
               <h3>Call Us</h3>
-              <p>+1 5589 55488 55</p>
+              <p>+1 1111 11111 11</p>
             </div>
           </div><!-- End Info Item -->
 
@@ -1190,7 +1190,7 @@
             <i class="bi bi-envelope flex-shrink-0"></i>
             <div>
               <h3>Email Us</h3>
-              <p>info.com</p>
+              <p>im.com</p>
             </div>
           </div><!-- End Info Item -->
 
@@ -1201,27 +1201,22 @@
             <div class="row gy-4">
 
               <div class="col-md-6">
-                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+               <input id="name" formControlName="name" placeholder="name" />
               </div>
 
               <div class="col-md-6 ">
-                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                <input id="email" formControlName="email" placeholder="email" />
               </div>
 
               <div class="col-md-12">
-                <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-              </div>
-
-              <div class="col-md-12">
-                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                <textarea formControlName="message" rows="6" placeholder="Message" required=""></textarea>
               </div>
 
               <div class="col-md-12 text-center">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                <button type="submit">Send Message</button>
+                <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Send Message</button>
               </div>
 
             </div>

@@ -31,6 +31,5 @@ export const routes: Routes = [
   { path : 'addR' , component : ReservationFormComponent},
   { path : 'search' , component : HomeComponent},
 
-
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

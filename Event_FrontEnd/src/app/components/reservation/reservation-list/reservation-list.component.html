@@ -1,44 +1,45 @@
-<!-- <app-my-nav></app-my-nav>
+<!--<app-my-nav></app-my-nav>-->
 
+<!--<main class="main">-->
+<!--  <div *ngIf="reservations.length > 0; else noReservations">-->
+<!--    <div class="container">-->
+<!--      <div class="card my-5">-->
+<!--        <div class="card-body">-->
+<!--          <table class="table table-bordered table-striped">-->
+<!--            <thead class="thead-dark">-->
+<!--            <tr>-->
+<!--              <th scope="col">#</th>-->
+<!--              <th scope="col">dateTime</th>-->
+<!--              <th scope="col">Event Name</th>-->
+<!--              <th scope="col">Event Description</th>-->
+<!--              <th scope="col">Event Location</th>-->
+<!--              <th scope="col">Event Category</th>-->
+
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr *ngFor="let reservation of reservations">-->
+<!--              <td>{{ reservation.id }}</td>-->
+<!--              <td>{{ reservation.dateTime }}</td>-->
+<!--              <td>{{ reservation.event?.name }}</td>-->
+<!--              <td>{{ reservation.event?.description }}</td>-->
+<!--              <td>{{ reservation.event?.location }}</td>-->
+<!--              <td>{{ reservation.event?.category }}</td>-->
+
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--          </table>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <ng-template #noReservations>-->
+<!--    <p>No Reservations found.</p>-->
+<!--  </ng-template>-->
+<!--</main>-->
+<!-- &ndash;&gt;-->
 <main class="main">
-  <div *ngIf="reservations.length > 0; else noReservations">
-    <div class="container">
-      <div class="card my-5">
-        <div class="card-body">
-          <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">dateTime</th>
-              <th scope="col">Event Name</th>
-              <th scope="col">Event Description</th>
-              <th scope="col">Event Location</th>
-              <th scope="col">Event Category</th>
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let reservation of reservations">
-              <td>{{ reservation.id }}</td>
-              <td>{{ reservation.dateTime }}</td>
-              <td>{{ reservation.event?.name }}</td>
-              <td>{{ reservation.event?.description }}</td>
-              <td>{{ reservation.event?.location }}</td>
-              <td>{{ reservation.event?.category }}</td>
-
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <ng-template #noReservations>
-    <p>No Reservations found.</p>
-  </ng-template>
-</main>
- -->
-<div class="main">
   <div class="report-container">
     <div class="report-header">
         <h1 class="recent-Articles">All Reservations</h1>
@@ -55,13 +56,13 @@
 
         <div class="items">
             <div class="item1" *ngFor="let reservation of reservations">
-              <h3 class="t-op-nextlvl">{{ reservation.event?.name}}</h3>  
+              <h3 class="t-op-nextlvl">{{ reservation.event?.name}}</h3>
               <h3 class="t-op-nextlvl">{{ reservation.dateTime | date}}</h3>
                 <h3 class="t-op-nextlvl">{{ reservation.event?.category}}</h3>
                 <h3 class="t-op-nextlvl">{{ reservation.event?.location}}</h3>
             </div>
 
-            <!-- <div class="item1">
+           <div class="item1">
                 <h3 class="t-op-nextlvl">Article 72</h3>
                 <h3 class="t-op-nextlvl">1.5k</h3>
                 <h3 class="t-op-nextlvl">360</h3>
@@ -115,9 +116,9 @@
                 <h3 class="t-op-nextlvl">1.3k</h3>
                 <h3 class="t-op-nextlvl">220</h3>
                 <h3 class="t-op-nextlvl label-tag">Published</h3>
-            </div> -->
+            </div>
 
         </div>
     </div>
 </div>
-</div>
+</main>

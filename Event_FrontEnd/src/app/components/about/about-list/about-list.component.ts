@@ -23,6 +23,7 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 export class AboutListComponent implements OnInit {
   about: any[] = [];
 
+
   constructor(private contactService: ContactService) {}
 
   ngOnInit(): void {

@@ -1,0 +1,271 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 60px;
+  transition: 0.4s;
+
+  box-shadow: none;
+  border-radius: 0;
+  color: var(--default-color);
+  background-color:
+    color-mix(in srgb, var(--background-color), transparent 50%);
+  border-color:
+    color-mix(in srgb, var(--accent-color), transparent 70%);
+}
+
+  .search-container[_ngcontent-ng-c1982144551] .form-group[_ngcontent-ng-c1982144551] button[_ngcontent-ng-c1982144551] {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: var(--default-color);
+    border: 2px solid var(--accent-color);
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    width: 100%;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 10px;
+
+      &::placeholder {
+        color: #aaa;
+      }
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--default-color);
+      border: 2px solid var(--accent-color);
+      background: transparent;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        border: 2px solid var(--accent-color);
+        background: transparent;
+        transition: background-color 0.3s ease;      }
+    }
+  }
+
+.form-group[_ngcontent-ng-c1748837333] input[_ngcontent-ng-c1748837333], .form-group[_ngcontent-ng-c1748837333] select[_ngcontent-ng-c1748837333] {
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: none;
+  border-radius: 0;
+  color: var(--default-color);
+  background-color:
+    color-mix(in srgb, var(--background-color), transparent 50%);
+  border-color:
+    color-mix(in srgb, var(--accent-color), transparent 70%);
+}
+.event-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .event-item {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+
+    h3 {
+      margin: 0 0 10px 0;
+    }
+
+    p {
+      color: var(--accent-color);
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--heading-font);
+      display: flex;
+      justify-content: center;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap');
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lexend", sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #393232;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.card-list {
+  width: 90%;
+  max-width: 400px;
+}
+
+.card {
+  background-color: #FFF;
+  box-shadow: 0 0 0 1px rgba(#000, .05), 0 20px 50px 0 rgba(#000, .1);
+  border-radius: 15px;
+  overflow: hidden;
+  padding: 1.25rem;
+  position: relative;
+  transition: .15s ease-in;
+  margin-top: 61px;
+  align-items: center;
+
+
+
+  &:hover, &:focus-within {
+    box-shadow: 0 0 0 2px #ffb11f, 0 10px 60px 0 rgba(#000, .1);
+    transform: translatey(-5px);
+  }
+}
+
+.card-image {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  a {
+    font-weight: 600;
+    font-size: 1.375rem;
+    line-height: 1.25;
+    padding-right: 1rem;
+    text-decoration: none;
+    color: inherit;
+    will-change: transform;
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+
+}
+
+.icon-button {
+  background-color: #fff;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  transition: .25s ease;
+  box-shadow: 0 0 0 1px rgba(#000, .05), 0 3px 8px 0 rgba(#000, .15);
+  z-index: 1;
+  cursor: pointer;
+  color: #565656;
+  display: flex;
+  justify-content: center;
+  border: 2px solid var(--accent-color);
+
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+  &:hover, &:focus {
+    background-color: #EC4646;
+    color: #FFF;
+  }
+}
+
+.card-footer {
+  margin-top: 1.25rem;
+  border-top: 1px solid #ddd;
+  padding-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  color: #787878;
+  &:first-child:after {
+    display: block;
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: currentcolor;
+    margin-left: .75rem;
+    margin-right: .75rem;
+  }
+  svg {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+    margin-right: .25em;
+  }
+}
+.form-group[_ngcontent-ng-c3312470336] input[_ngcontent-ng-c3312470336], .form-group[_ngcontent-ng-c3312470336] select[_ngcontent-ng-c3312470336] {
+  width: 100%;
+  font-size: 16px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--default-color);
+  border: 2px solid var(--accent-color);
+  background: transparent;
+  transition: background-color 0.3s ease;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}

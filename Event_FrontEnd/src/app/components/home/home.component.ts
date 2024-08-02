@@ -397,7 +397,7 @@ export class HomeComponent implements OnInit {
       this.reservationService.saveReservation(reservation).subscribe({
         next: (response) => {
           console.log('Reservation saved successfully', response);
-          this.router.navigate(['/reservations']);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
           console.error('Error during saving reservation', error);

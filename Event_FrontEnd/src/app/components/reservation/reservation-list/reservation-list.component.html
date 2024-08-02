@@ -41,27 +41,27 @@
 <div class="main">
   <div class="report-container">
     <div class="report-header">
-        <h1 class="recent-Articles">Recent Articles</h1>
-        <button class="view">View All</button>
+        <h1 class="recent-Articles">All Reservations</h1>
+        <!-- <button class="view">View All</button> -->
     </div>
 
     <div class="report-body">
-        <div class="report-topic-heading">
-            <h3 class="t-op">Article</h3>
-            <h3 class="t-op">Views</h3>
-            <h3 class="t-op">Comments</h3>
-            <h3 class="t-op">Status</h3>
+        <div class="report-topic-heading"style="color: black;">
+            <h3 class="t-op">Event Name</h3>
+            <h3 class="t-op">reservation Date</h3>
+            <h3 class="t-op">Event Category</h3>
+            <h3 class="t-op">Event Location</h3>
         </div>
 
         <div class="items">
-            <div class="item1">
-                <h3 class="t-op-nextlvl">Article 73</h3>
-                <h3 class="t-op-nextlvl">2.9k</h3>
-                <h3 class="t-op-nextlvl">210</h3>
-                <h3 class="t-op-nextlvl label-tag">Published</h3>
+            <div class="item1" *ngFor="let reservation of reservations">
+              <h3 class="t-op-nextlvl">{{ reservation.event?.name}}</h3>  
+              <h3 class="t-op-nextlvl">{{ reservation.dateTime | date}}</h3>
+                <h3 class="t-op-nextlvl">{{ reservation.event?.category}}</h3>
+                <h3 class="t-op-nextlvl">{{ reservation.event?.location}}</h3>
             </div>
 
-            <div class="item1">
+            <!-- <div class="item1">
                 <h3 class="t-op-nextlvl">Article 72</h3>
                 <h3 class="t-op-nextlvl">1.5k</h3>
                 <h3 class="t-op-nextlvl">360</h3>
@@ -115,7 +115,7 @@
                 <h3 class="t-op-nextlvl">1.3k</h3>
                 <h3 class="t-op-nextlvl">220</h3>
                 <h3 class="t-op-nextlvl label-tag">Published</h3>
-            </div>
+            </div> -->
 
         </div>
     </div>

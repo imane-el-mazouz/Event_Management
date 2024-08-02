@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NavbarComponent} from "../../navbar/navbar.component";
-import {NgForOf, NgIf} from "@angular/common";
+import {CommonModule, NgForOf, NgIf} from "@angular/common";
 import {Reservation} from "../../../model/reservation_model/reservation";
 import {ReservationService} from "../../../service/reservation_service/reservation.service";
 
@@ -10,7 +10,8 @@ import {ReservationService} from "../../../service/reservation_service/reservati
   imports: [
     NavbarComponent,
     NgIf,
-    NgForOf
+    NgForOf,
+    CommonModule
   ],
   templateUrl: './reservation-list.component.html',
   styleUrl: './reservation-list.component.scss'

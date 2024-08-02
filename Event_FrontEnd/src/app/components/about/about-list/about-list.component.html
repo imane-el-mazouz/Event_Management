@@ -16,7 +16,35 @@
 <!--    <p>No information available at the moment. Please check back later.</p>-->
 <!--  </div>-->
 <!--</main>-->
-<main class="about-list-main">
+
+
+  <section id="about" class="about section">
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="row gy-4">
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img src="assets/img/about.jpg" class="img-fluid about-img" alt="">
+        </div>
+        <div class="col-lg-6 order-2 order-lg-1 content">
+          <h3 style="color: var(--accent-color);margin: 0; font-size: 36px;font-weight: 600;font-family: var(--heading-font);">Creating Memorable Events</h3>
+          <p class="fst-italic">
+            We specialize in organizing a wide range of events tailored to your needs, ensuring every detail is perfect.
+          </p>
+          <ul>
+            <li><i class="bi bi-check2-all"></i> <span>Expert event planning and coordination.</span></li>
+            <li><i class="bi bi-check2-all"></i> <span>Personalized services to meet your unique requirements.</span></li>
+            <li><i class="bi bi-check2-all"></i> <span>Comprehensive support from start to finish, ensuring a seamless experience.</span></li>
+          </ul>
+          <p>
+            Our team is dedicated to providing exceptional service and creating unforgettable experiences for our clients. Whether it's a wedding, corporate event, or private party, we are here to bring your vision to life.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </section><!-- /About Section -->
   <h2>About Our Team and Values</h2>
   <div *ngIf="about.length > 0">
     <div *ngFor="let item of about">
@@ -42,4 +70,4 @@
   <div *ngIf="about.length === 0">
     <p>No information available at the moment. Please check back later.</p>
   </div>
-</main>
+<router-outlet></router-outlet>

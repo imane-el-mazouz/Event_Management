@@ -220,6 +220,7 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
 }
 
 .login100-form-btn {
@@ -239,7 +240,18 @@ iframe {
   box-shadow: 0 10px 30px rgba(241, 196, 15, 0.5); /* Ombre jaune douce */
   transition: all .4s;
 }
-
+.container-login100[_ngcontent-ng-c1594781714] {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(245, 247, 250, 0.8), rgba(195, 207, 226, 0.8)),
+  url('/assets/img/events-bg.jpg') no-repeat center center / cover;
+  padding: 20px;
+}
 .login100-form-btn:hover {
   background-color: #e0b90f; /* Jaune plus foncé pour le survol */
   box-shadow: 0 10px 30px rgba(224, 185, 15, 0.5);

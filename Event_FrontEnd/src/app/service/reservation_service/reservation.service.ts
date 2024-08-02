@@ -32,8 +32,7 @@ export class ReservationService {
   }
 
   getUserReservations(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError));
+    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations`);
   }
 
   private handleError(error: any): Observable<never> {

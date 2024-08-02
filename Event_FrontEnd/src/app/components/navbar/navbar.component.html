@@ -30,74 +30,53 @@
 <!--</mat-sidenav-container>-->
 <!-- navbar.component.html -->
 
-<header id="header" class="header d-flex align-items-center fixed-top">
+<header id="header" class="header fixed-top">
 
-  <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+  <div class="topbar d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">im-events&#64;gmail.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 1111 11111 11</span></i>
+      </div>
+      <div class="languages d-none d-md-flex align-items-center">
+        <ul>
+          <li>En</li>
+          <li><a href="#">Fr</a></li>
+        </ul>
+      </div>
+    </div>
+  </div><!-- End Top Bar -->
 
-    <a routerLink="/home" class="logo d-flex align-items-center me-auto me-lg-0">
-      <h1 class="sitename">IM-BANK</h1>
-      <span>.</span>
-    </a>
+  <div class="branding d-flex align-items-cente">
 
-    <nav id="navmenu" class="navmenu">
-      <ul>
-        <!-- Other Links -->
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+<!--         <img src="assets/img/logo.jpg" alt="">-->
+        <h1 class="sitename">IM - EVENTS</h1>
+      </a>
 
-        <li class="dropdown">
-          <a href="#"><span>Sections</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul>
-            <li><a [routerLink]="['/about']" fragment="about" routerLinkActive="active">About</a></li>
-            <li><a [routerLink]="['/home']" fragment="services" routerLinkActive="active">Services</a></li>
-            <li><a [routerLink]="['/home']" fragment="portfolio" routerLinkActive="active">Portfolio</a></li>
-            <li><a [routerLink]="['/home']" fragment="team" routerLinkActive="active">Team</a></li>
-            <li><a [routerLink]="['/home']" fragment="contact" routerLinkActive="active">Contact</a></li>
-          </ul>
-        </li>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a [routerLink]="['/home']" fragment="home" routerLinkActive="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#specials">Specials</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
 
-        <!-- Other Dropdowns -->
-        <li class="dropdown">
-          <a href="#"><span>Beneficiaries</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul>
-            <li><a routerLink="/beneficiaries" routerLinkActive="active">List Beneficiaries</a></li>
-            <li><a routerLink="/benef" routerLinkActive="active">Add Beneficiary</a></li>
-          </ul>
-        </li>
+      <a class="btn-book-a-table d-none d-xl-block" href="#book-a-table">Book Event</a>
+      <a class="btn-book-a-table d-none d-xl-block" routerLink="/signup" routerLinkActive="active">Sign Up</a>
+      <a class="btn-book-a-table d-none d-xl-block" routerLink="/login" routerLinkActive="active">Login</a>
 
-        <li class="dropdown">
-          <a href="#"><span>Cards</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul>
-            <li><a routerLink="/cards" routerLinkActive="active">List Cards</a></li>
-            <li><a routerLink="/addcard" routerLinkActive="active">Add Card</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a href="#"><span>Accounts</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul>
-            <li><a routerLink="/accounts" routerLinkActive="active">List Accounts</a></li>
-            <li><a routerLink="/addAccount" routerLinkActive="active">Add Account</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a href="#"><span>Transactions</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul>
-            <li><a routerLink="/transactions" routerLinkActive="active">List Transactions</a></li>
-            <li><a routerLink="/createTransaction" routerLinkActive="active">Add Transaction</a></li>
-          </ul>
-        </li>
-
-        <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
-        <li><a routerLink="/signup" routerLinkActive="active">Sign Up</a></li>
-      </ul>
-      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-    </nav>
-
-    <a class="btn-getstarted" routerLink="/about">Get Started</a>
+    </div>
 
   </div>
-</header>
 
+</header>
 
 <!--<mat-toolbar color="primary">-->
 <!--  <span>Event Management</span>-->

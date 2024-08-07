@@ -243,6 +243,9 @@ export class HomeComponent implements OnInit {
   searchPerformed = false;
   contactForm: FormGroup;
   contacts: Contact[] = [];
+  successMessageVisible: boolean = false;
+  successContact: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -319,32 +322,52 @@ export class HomeComponent implements OnInit {
       let reservation = this.reservationForm.value;
       let selectedEvent = this.events.find(event => event.idE === this.reservationForm.get('event')?.value?.idE);
       reservation.event = selectedEvent || null;
-
+      this.successMessageVisible = true;
       this.reservationService.saveReservation(reservation).subscribe({
         next: (response) => {
           console.log('Reservation saved successfully', response);
-          this.router.navigate(['/home']);
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 3000);
         },
         error: (error) => {
           console.error('Error during saving reservation', error);
           alert('An error occurred while saving the reservation. Please try again later.');
+          this.successMessageVisible = false;
         }
       });
-    }
-    if (this.contactForm.valid) {
-      let contact: Contact = this.contactForm.value;
-      this.contactService.saveContact(contact).subscribe({
-        next: (response) => {
-          console.log('Contact saved successfully', response);
-          this.router.navigate(['/home']);
-        },
-        error: (error) => {
-          console.error('Error during saving contact', error);
-          this.router.navigate(['/home']);
-        }
-      });
-    }
-  }
+    // }
+    // if (this.contactForm.valid) {
+    //   let contact: Contact = this.contactForm.value;
+    //   this.contactService.saveContact(contact).subscribe({
+    //     next: (response) => {
+    //       console.log('Contact saved successfully', response);
+    //       this.router.navigate(['/home']);
+    //     },
+    //     error: (error) => {
+    //       console.error('Error during saving contact', error);
+    //       this.router.navigate(['/home']);
+    //     }
+    //   });
+    // }
+      if (this.contactForm.valid) {
+        let contact: Contact = this.contactForm.value;
+        this.successContact = false;
+        this.successMessageVisible = false;
+        this.contactService.saveContact(contact).subscribe({
+          next: (response) => {
+            console.log('Contact saved successfully', response);
+            this.successContact = true;
+            setTimeout(() => this.router.navigate(['/home']), 2000); // Redirect after 2 seconds
+          },
+          error: (error) => {
+            console.error('Error during saving contact', error);
+            this.successContact = false;
+            alert('An error occurred while saving the contact. Please try again later.');
+          }
+        });
+      }
+    }}
 
   private loadEvents(): void {
     this.eventService.getEvents().subscribe({

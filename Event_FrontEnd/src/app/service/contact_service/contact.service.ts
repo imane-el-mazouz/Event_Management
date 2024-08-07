@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Contact} from "../../model/contact_model/contact";
-import {Observable, throwError} from "rxjs";
+import {Observable, tap, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {Reservation} from "../../model/reservation_model/reservation";
 
@@ -37,10 +37,14 @@ export class ContactService {
       .pipe(catchError(this.handleError));
   }
 
-  getAbout() : Observable<string[]>{
-    return this.http.get<string[]>(`${this.apiUrl}/about`, { headers: this.getHeaders() })
+
+  getAbout(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/about`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
+
+
+
 
 }
 

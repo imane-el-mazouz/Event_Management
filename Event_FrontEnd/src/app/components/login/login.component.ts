@@ -42,6 +42,7 @@ export class LoginComponent {
       .subscribe(
         response => {
           this.authService.setToken(response.accessToken);
+
           if (response.user.role === 'ADMIN') {
             this.router.navigate(['/dashboard']);
           } else if (response.user.role === 'CLIENT') {

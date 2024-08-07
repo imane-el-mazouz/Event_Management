@@ -189,7 +189,7 @@
 <div class="search-container">
   <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
     <div class="form-group">
-      <input id="l" formControlName="location" placeholder="What are you looking for?" />
+      <input id="l" formControlName="location" placeholder="What are you looking for?" style="" />
     </div>
     <div class="form-group">
       <select id="c" formControlName="category">
@@ -199,65 +199,55 @@
       </select>
     </div>
     <div class="form-group">
+      <input type="date" id="d" formControlName="dateTime" placeholder="Select date" />
+    </div>
+
+    <div class="form-group">
       <button type="submit">Search</button>
     </div>
   </form>
 </div>
 <!-- Event Cards -->
-<div *ngIf="searchPerformed && events.length > 0" class="card-list">
-  <div class="container">
-
-    <article class="card" *ngFor="let event of events">
-      <figure class="card-image">
-        <img src="assets/img/gallery/gallery-2.jpg" alt="{{ event.name }}" />
-      </figure>
-      <div class="card-header">
-        <a href="#" style="color: var(--accent-color);
-    text-decoration: none;
-    transition: 0.3s;">{{ event.name }}</a>
-        <button class="icon-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Heart">
-            <path d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95 22 5.216 19.761 3 17 3s-5 3-5 3-2.239-3-5-3z" />
-          </svg>
-        </button>
+<!-- Event Cards -->
+<!-- Event Cards -->
+<div *ngIf="searchPerformed && events.length > 0" class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <!-- Card Container -->
+      <div class="card-deck">
+        <article class="card mb-4" *ngFor="let event of events">
+          <figure class="card-image">
+            <img src="assets/img/gallery/gallery-2.jpg" alt="{{ event.name }}" class="card-img-top" />
+          </figure>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="#" class="text-decoration-none text-primary">{{ event.name }}</a>
+            </h5>
+            <p class="card-text">
+              {{ event.dateTime | date }}
+            </p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline-primary" [routerLink]="['/home']">
+              View details
+            </button>
+            <button type="button" class="btn btn-outline-primary" [routerLink]="['/home']">
+              Book ticket
+            </button>
+          </div>
+        </article>
       </div>
-
-      <div class="card-footer">
-        <div class="card-meta card-meta--views">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
-            <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
-            <circle cx="12" cy="12" r="3" />
-          </svg>
-        </div>
-        <div class="card-meta card-meta--date">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Calendar">
-            <rect x="2" y="4" width="20" height="18" rx="4" />
-            <path d="M8 2v4" />
-            <path d="M16 2v4" />
-            <path d="M2 10h20" />
-          </svg>
-          {{ event.dateTime | date }}
-        </div>
-      </div>
-
-      <div class="bu" style="display: flex; justify-content: space-between;">
-        <button type="submit" [routerLink]="['/events']" style="color:black; background: none; border: 2px solid var(--accent-color); padding: 8px 36px; transition: 0.4s; border-radius: 50px;">
-          View details
-        </button>
-        <button type="submit" [routerLink]="['/home']" style="color:black; background: none; border: 2px solid var(--accent-color); padding: 8px 36px; transition: 0.4s; border-radius: 50px;">
-          Book ticket
-        </button>
-      </div>
-    </article>
-
+    </div>
   </div>
 </div>
 
-<div *ngIf="searchPerformed && events.length === 0">
-  <p class="no-events-message" style="color: var(--accent-color); margin: 0; font-size: 11px; font-weight: 600; font-family: var(--heading-font); display: flex; justify-content: center;">
+<div *ngIf="searchPerformed && events.length === 0" class="text-center">
+  <p class="text-muted mb-0" id="er" style="color: var(--accent-color);">
     No events found for the given criteria.
   </p>
 </div>
+
+
   <!-- Specials Section -->
 <!--  <section id="specials" class="specials section">-->
 
@@ -776,7 +766,6 @@
 
 <section id="contact2" class="contact section">
 
-  <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
     <h2>Enjoy !</h2>
     <p>Book your ticket !</p>
@@ -789,22 +778,18 @@
       <div class="col-lg-4">
         <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
           <i class="bi bi-geo-alt flex-shrink-0"></i>
-
         </div><!-- End Info Item -->
 
         <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
           <i class="bi bi-telephone flex-shrink-0"></i>
-
         </div><!-- End Info Item -->
 
         <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
           <i class="bi bi-telephone flex-shrink-0"></i>
-
         </div><!-- End Info Item -->
 
         <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
           <i class="bi bi-envelope flex-shrink-0"></i>
-
         </div><!-- End Info Item -->
 
       </div>
@@ -823,13 +808,19 @@
                 <option *ngFor="let event of events" [ngValue]="event">{{ event.name }}</option>
               </select>
             </div>
+            <div class="col-md-12 text-center" style="    color:
+color-mix(in srgb, var(--accent-color), transparent 25%);
+    text-decoration: none;">
+              <div *ngIf="successMessageVisible" class="alert alert-success" id="suc" >
+                Your booking was successful!
+              </div>
+            </div>
             <div class="col-md-12 text-center">
               <div class="loading">Loading</div>
               <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+              <div class="sent-message" *ngIf="successMessageVisible">Your booking is successful. Thank you!</div>
 
               <button type="submit" class="btn btn-primary" [disabled]="reservationForm.invalid">Send Message</button>
-
             </div>
 
           </div>
@@ -838,7 +829,8 @@
 
     </div>
 
-  </div>
+  </div><!-- End Contact Section -->
+
 
 </section><!-- /Contact Section -->
 
@@ -1186,91 +1178,51 @@
 
 <!--</section>&lt;!&ndash; /Contact Section &ndash;&gt;-->
 
+<section id="contact" class="contact section">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Contact</h2>
+    <p>Contact Us</p>
+  </div><!-- End Section Title -->
 
-<!-- Contact Section -->
-  <section id="contact" class="contact section">
+  <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
+    <iframe style="border:0; width: 100%; height: 400px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div><!-- End Google Maps -->
 
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Contact</h2>
-      <p>Contact Us</p>
-    </div><!-- End Section Title -->
-
-    <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
-      <iframe style="border:0; width: 100%; height: 400px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div><!-- End Google Maps -->
-
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-      <div class="row gy-4">
-
-        <div class="col-lg-4">
-          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-            <i class="bi bi-geo-alt flex-shrink-0"></i>
-            <div>
-              <h3>Location</h3>
-              <p>A108 Adam Street, New York, NY 535022</p>
-            </div>
-          </div><!-- End Info Item -->
-
-          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-            <i class="bi bi-telephone flex-shrink-0"></i>
-            <div>
-              <h3>Open Hours</h3>
-              <p>Monday-Saturday:<br>11:00 AM - 2300 PM</p>
-            </div>
-          </div><!-- End Info Item -->
-
-          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-            <i class="bi bi-telephone flex-shrink-0"></i>
-            <div>
-              <h3>Call Us</h3>
-              <p>+1 1111 11111 11</p>
-            </div>
-          </div><!-- End Info Item -->
-
-          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
-            <i class="bi bi-envelope flex-shrink-0"></i>
-            <div>
-              <h3>Email Us</h3>
-              <p>im.com</p>
-            </div>
-          </div><!-- End Info Item -->
-
-        </div>
-
-        <div class="col-lg-8">
-           <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-            <div class="row gy-4">
-
-              <div class="col-md-6">
-                <input class="form-control"  id="name" formControlName="name" placeholder="name" />
-              </div>
-
-              <div class="col-md-6 ">
-                <input class="form-control" id="email" formControlName="email" placeholder="email" />
-              </div>
-
-              <div class="col-md-12">
-                <textarea  class="form-control" formControlName="message" rows="6" placeholder="Message" required=""></textarea>
-              </div>
-
-              <div class="col-md-12 text-center">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-                <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Send Message</button>
-              </div>
-
-            </div>
-          </form>
-        </div><!-- End Contact Form -->
-
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row gy-4">
+      <div class="col-lg-4">
+        <!-- Info Items Here -->
       </div>
 
-    </div>
+      <div class="col-lg-8">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+          <div class="row gy-4">
+            <div class="col-md-6">
+              <input class="form-control" id="name" formControlName="name" placeholder="Name" />
+            </div>
 
-  </section><!-- /Contact Section -->
+            <div class="col-md-6">
+              <input class="form-control" id="email" formControlName="email" placeholder="Email" />
+            </div>
+
+            <div class="col-md-12">
+              <textarea class="form-control" formControlName="message" rows="6" placeholder="Message" required></textarea>
+            </div>
+            <div *ngIf="successContact" class="alert alert-success" id="suc3">
+              Your message has been sent. Thank you!
+            </div>
+            <div class="col-md-12 text-center">
+              <div class="loading" *ngIf="!successContact">Loading</div>
+              <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Send Message</button>
+            </div>
+          </div>
+        </form>
+      </div><!-- End Contact Form -->
+    </div>
+  </div>
+</section><!-- /Contact Section -->
+
 
 
 <!--    <div>-->

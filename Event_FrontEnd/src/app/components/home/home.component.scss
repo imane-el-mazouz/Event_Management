@@ -624,3 +624,52 @@ section,
   height: auto;
   object-fit: cover;
 }
+
+#l,#c,#d{
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--default-color);
+  border: 2px solid var(--accent-color);
+  background: transparent;
+  transition: background-color 0.3s ease;
+}
+
+#suc , #suc3 , #er{
+  color: var(--accent-color);
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--heading-font);
+  display: flex;
+  justify-content: center;
+}
+
+.card-img-top {
+  height: 400px; /* Ajuste la hauteur selon le besoin */
+  object-fit: cover; /* Assure que l'image couvre la zone sans déformation */
+  width: 100%; /* Assure que l'image occupe toute la largeur de la carte */
+}
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid var(--accent-color); /* Ajoute une bordure avec la couleur d'accent */
+}
+
+.card-title a {
+  color: var(--accent-color); /* Applique la couleur d'accent au titre */
+  transition: color 0.3s; /* Transition pour un effet de survol */
+}
+
+
+
+.btn-outline-primary {
+  color: var(--accent-color); /* Applique la couleur d'accent au texte du bouton */
+  border-color: var(--accent-color); /* Applique la couleur d'accent à la bordure du bouton */
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--accent-color); /* Change le fond du bouton au survol */
+  color: white; /* Change la couleur du texte du bouton au survol */
+}

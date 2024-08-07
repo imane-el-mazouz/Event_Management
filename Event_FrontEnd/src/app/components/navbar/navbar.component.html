@@ -69,8 +69,8 @@
       </nav>
 
       <a class="btn-book-a-table d-none d-xl-block" href="#book-a-table">Book Event</a>
-      <a class="btn-book-a-table d-none d-xl-block" routerLink="/signup" routerLinkActive="active">Sign Up</a>
-      <a class="btn-book-a-table d-none d-xl-block" routerLink="/login" routerLinkActive="active">Login</a>
+      <a class="btn-book-a-table d-none d-xl-block" routerLink="/signup" routerLinkActive="active" *ngIf="isLogin()" >Sign Up</a>
+      <a class="btn-book-a-table d-none d-xl-block" routerLink="/login" routerLinkActive="active">{{ isLogin() ? "login" : "logout" }}</a>
 
     </div>
 

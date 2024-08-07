@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../../../service/contact_service/contact.service';
-import {NgForOf, NgIf} from "@angular/common";
-import {MatCardModule} from "@angular/material/card";
-import {NavbarComponent} from "../../navbar/navbar.component";
-import {RouterLink, RouterOutlet} from "@angular/router";
+import { NgForOf, NgIf } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { NavbarComponent } from '../../navbar/navbar.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-about-list',
@@ -16,13 +16,11 @@ import {RouterLink, RouterOutlet} from "@angular/router";
     NavbarComponent,
     RouterOutlet,
     RouterLink
-
   ],
   styleUrls: ['./about-list.component.scss']
 })
 export class AboutListComponent implements OnInit {
   about: any[] = [];
-
 
   constructor(private contactService: ContactService) {}
 
@@ -33,7 +31,7 @@ export class AboutListComponent implements OnInit {
   loadAbout() {
     this.contactService.getAbout().subscribe({
       next: (about) => this.about = about,
-      error: (error) => console.error('Error loading about team and values', error)
+      error: (error) => console.error('Error loading about data', error)
     });
   }
 }
